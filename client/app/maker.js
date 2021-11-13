@@ -15,7 +15,7 @@ const handleDomo = (e) => {
     return false;
 };
 
-const domoForm = (props) => {
+const DomoForm = (props) => {
     return (
         <form id="domoForm" onSubmit={handleDomo}
         name="domoForm"
@@ -60,7 +60,7 @@ const DomoList = function(props) {
 };
 
 const loadDomosFromServer = () => {
-    sendAjax('GET', '/getDomo', null, (data) => {
+    sendAjax('GET', '/getDomos', null, (data) => {
         ReactDOM.render(
             <DomoList domos={data.domos} />, document.querySelector("#domos")
         );
@@ -69,7 +69,7 @@ const loadDomosFromServer = () => {
 
 const setup = function(csrf) {
     ReactDOM.render(
-        <domoForm csrf={csrf} />, document.querySelector("#makeDomo")
+        <DomoForm csrf={csrf} />, document.querySelector("#makeDomo")
     );
 
     ReactDOM.render(

@@ -16,7 +16,7 @@ const getToken = (request, response) => {
     };
 
     res.json(csrfJSON);
-}
+};
 
 const logout = (req, res) => {
     req.session.destroy();

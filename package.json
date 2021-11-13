@@ -2,17 +2,17 @@
   "name": "Logins",
   "version": "1.0.0",
   "engines": {
-    "node": "12.16.0",
-    "npm": "6.13.7"
-  }, 
+    "node": "14.17.x",
+    "npm": "7.24.x"
+  },
   "description": "A Simple Login Example using Node.js, Mongo and Redis",
   "main": "./server/app.js",
   "scripts": {
-    "buildLoginBundle" : "babel ./client/helper --presets @babel/preset-react --out-file ./hosted/loginBundle.js",
-    "buildAppBundle" : "babel ./client/app ./client/helper presets @babel/preset react --out file ./hosted/bundle.js",
-    "build" : "npm run buildLoginBundle && npm run buildAppBundle",
-    "watchLoginBundle" : "babel --watch ./client/login ./client/helper --presets @babel/preset-react --out-file ./hosted/loginBundle.js",
-    "watchAppBundle" : "babel --watch ./client/app .client/helper --presets @babel/preset-react --out-file ./hosted/bundle.js",
+    "buildLoginBundle": "babel ./client/login ./client/helper --presets @babel/preset-react --out-file ./hosted/loginBundle.js",
+    "buildAppBundle": "babel ./client/app ./client/helper --presets @babel/preset react --out-file ./hosted/bundle.js",
+    "build": "npm run buildLoginBundle && npm run buildAppBundle",
+    "watchLoginBundle": "babel --watch ./client/login ./client/helper --presets @babel/preset-react --out-file ./hosted/loginBundle.js",
+    "watchAppBundle": "babel --watch ./client/app ./client/helper --presets @babel/preset-react --out-file ./hosted/bundle.js",
     "nodemon": "nodemon --watch ./server ./server/app.js",
     "start": "node ./server/app.js",
     "pretest": "eslint ./server --fix",
@@ -28,8 +28,10 @@
   "license": "Apache 2.0",
   "devDependencies": {
     "@babel/cli": "^7.15.7",
+    "@babel/compat-data": "^7.16.0",
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.16.0",
     "eslint": "^8.1.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.25.2",
@@ -48,7 +50,6 @@
     "mongoose": "^6.0.12",
     "redis": "^3.1.2",
     "serve-favicon": "^2.5.0",
-    "underscore": "^1.13.1",
-    "y": "^0.3.2"
+    "underscore": "^1.13.1"
   }
 }

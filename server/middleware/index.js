@@ -18,7 +18,7 @@ const requiresSecure = (req, res, next) => {
         return res.redirect(`https://${req.hostname}${req.url}`);
     }
     return next();
-}
+};
 
 const bypassSecure = (req, res, next) => {
     next();
