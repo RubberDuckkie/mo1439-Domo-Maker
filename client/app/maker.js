@@ -3,7 +3,7 @@ const handleDomo = (e) => {
 
     $("#domoMessage").animate({width:'hide'},350);
 
-    if($("domoName").val() == '' || $("#domoAge").val() == '') {
+    if($("domoName").val() == '' || $("#domoAge").val() == '' || $("#domoLevel").val() == '') {
         handleError("RAWR! All fields are required");
         return false;
     }
@@ -14,6 +14,14 @@ const handleDomo = (e) => {
     
     return false;
 };
+
+const goodbyeDomo = (e) =>{
+    e.preventDefault();
+
+    sendAjax('DELETE', $("domoDelete").attr("action"), $("#domoDelete").serialize(), function() {
+        loadDomosFromServer();
+    });
+}
 
 const DomoForm = (props) => {
     return (
@@ -27,11 +35,29 @@ const DomoForm = (props) => {
             <input id="domoName" type="text" name="name" placeholder="Domo Name" />
             <label htmlFor="age">Age: </label>
             <input id="domoAge" type="text" name="age" placeholder="Domo Age"/>
+            <label htmlFor="age">Level: </label>
+            <input id="domoLevel" type="text" name="level" placeholder="Domo Level"/>
             <input type="hidden" name="_csrf" value={props.csrf} />
             <input className="makeDomoSubmit" type="submit" value="Make Domo" />
         </form>
     );
 };
+
+const deleteDomoByName = (props) =>{
+    return (
+        <form id="domoDelete" onSubmit={goodbyeDomo}
+        name="domoDelete"
+        action="/delete-domo"
+        method="DELETE"
+        className="domoForm"
+        >
+            <label htmlFor="deleteName">Name: </label>
+            <input id="domoDeleteName" type="text" name="deleteName" placeholder="Domo Name" />
+            <input type="hidden" name="_csrf" value={props.csrf} />
+            <input className="makeDomoSubmit" type="submit" value="Delete Domo" />
+        </form>
+    );
+}
 
 const DomoList = function(props) {
     if(props.domos.length === 0){
@@ -48,6 +74,7 @@ const DomoList = function(props) {
                 <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
                 <h3 className="domoname">Name: {domo.name}</h3>
                 <h3 className="domoAge">Age: {domo.age}</h3>
+                <h3 className="domoLevel">Level: {domo.level}</h3>
             </div>
         );
     });
@@ -67,6 +94,7 @@ const loadDomosFromServer = () => {
     });
 };
 
+
 const setup = function(csrf) {
     ReactDOM.render(
         <DomoForm csrf={csrf} />, document.querySelector("#makeDomo")
@@ -76,6 +104,9 @@ const setup = function(csrf) {
         <DomoList domos={[]} />, document.querySelector("#domos")
     );
 
+    ReactDOM.render(
+        <deleteDomoByName domos={[]} />, document.querySelector("#domoDelete")
+    );
     loadDomosFromServer();
 };
 
